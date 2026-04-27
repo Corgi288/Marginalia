@@ -1,0 +1,40 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Деталі книги | Marginalia</title>
+    <link rel="stylesheet" href="{% static 'books/css/details.css' %}">
+</head>
+<body>
+
+<div class="container">
+    <nav>
+        <a href="{% url 'books:book_feed' %}" class="back-link">← Повернутися до стрічки</a>
+    </nav>
+
+ 
+    <article class="book-card-detail">
+        <div class="book-cover">
+            {% if book.cover %}
+                <img src="{{ book.cover.url }}" alt="{{ book.title }}">
+            {% else %}
+                <div class="no-image">Обкладинка відсутня</div>
+            {% endif %}
+        </div>
+
+        <div class="book-info">
+            <h1 class="book-title">{{ book.title }}</h1>
+            <p class="book-authors">{{ book.author}}</p>
+
+            <div class="book-description">
+                <h3>Короткий опис</h3>
+                 {{ book.description|safe }}
+            </div>
+        </div>
+    </article>
+</div>
+
+</body>
+</html>

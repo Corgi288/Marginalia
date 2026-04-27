@@ -1,0 +1,38 @@
+{% load static %}
+
+{% load static %}
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Marginalia | Стрічка книг</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="{% static 'books/css/style.css' %}">
+</head>
+<body>
+
+    <h1>Marginalia</h1>
+
+    <div class="books-grid">
+        {% for book in books %}
+        <div class="book-card">
+            {% if book.cover %}
+                <img src="{{ book.cover.url }}" alt="{{ book.title }}">
+            {% else %}
+                <div class="no-image">Обкладинка відсутня</div>
+            {% endif %}
+
+            <div class="book-info">
+                <h2 class="book-title">{{ book.title }}</h2>
+                <p class="book-authors">{{ book.authors|join:", " }}</p>
+               <a href="{% url 'books:details' book.slug %}" class="btn-details">Детальніше</a>
+            </div>
+        </div>
+        {% empty %}
+        <p>Книг не знайдено. Спробуйте оновити сторінку.</p>
+        {% endfor %}
+    </div>
+
+</body>
+</html>

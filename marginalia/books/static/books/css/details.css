@@ -1,0 +1,118 @@
+/* Основні налаштування */
+:root {
+    --bg-color: #fdfaf5;
+    --card-bg: #ffffff;
+    --text-main: #2c3e50;
+    --text-muted: #7f8c8d;
+    --accent: #5d4037; /* Коричневий відтінок для стилю Marginalia */
+    --accent-hover: #8d6e63;
+    --shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+}
+
+body {
+    background-color: var(--bg-color);
+    color: var(--text-main);
+    font-family: 'Georgia', serif; /* Засічки краще пасують до книг */
+    margin: 0;
+    padding: 40px 20px;
+}
+
+.container {
+    max-width: 900px;
+    margin: 0 auto;
+}
+
+/* Навігація */
+.back-link {
+    display: inline-block;
+    margin-bottom: 25px;
+    color: var(--accent);
+    text-decoration: none;
+    font-weight: bold;
+    font-family: 'Arial', sans-serif;
+}
+
+.back-link:hover {
+    text-decoration: underline;
+}
+
+/* Картка детальної інформації */
+.book-card-detail {
+    background: var(--card-bg);
+    border-radius: 12px;
+    box-shadow: var(--shadow);
+    display: flex;
+    gap: 40px;
+    padding: 30px;
+    margin-bottom: 30px;
+    overflow: hidden;
+}
+
+.book-cover {
+    flex-shrink: 0;
+    width: 280px;
+}
+
+.book-cover img {
+    width: 100%;
+    border-radius: 8px;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+}
+
+.no-image {
+    width: 100%;
+    height: 380px;
+    background: #eceff1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 8px;
+    color: var(--text-muted);
+}
+
+/* Текстова частина */
+.book-info {
+    flex-grow: 1;
+}
+
+.book-id {
+    font-family: 'Arial', sans-serif;
+    font-size: 0.85rem;
+    color: white;
+    background: var(--accent);
+    padding: 3px 10px;
+    border-radius: 15px;
+    display: inline-block;
+    margin-bottom: 15px;
+}
+
+.book-title {
+    font-size: 2.5rem;
+    margin: 0 0 10px 0;
+    line-height: 1.2;
+}
+
+.book-authors {
+    font-size: 1.3rem;
+    color: var(--text-muted);
+    font-style: italic;
+    margin-bottom: 25px;
+}
+
+.book-description {
+    line-height: 1.7;
+    font-family: 'Arial', sans-serif;
+    color: #444;
+}
+
+/* Адаптивність */
+@media (max-width: 768px) {
+    .book-card-detail {
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+    }
+    .book-cover {
+        width: 220px;
+    }
+}
