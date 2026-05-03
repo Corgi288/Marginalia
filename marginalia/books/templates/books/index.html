@@ -1,6 +1,4 @@
 {% load static %}
-
-{% load static %}
 <!DOCTYPE html>
 <html lang="uk">
 <head>
@@ -15,24 +13,42 @@
     <h1>Marginalia</h1>
 
     <div class="books-grid">
-        {% for book in books %}
+        {% for book in page_obj %}
         <div class="book-card">
             {% if book.cover %}
-                <img src="{{ book.cover.url }}" alt="{{ book.title }}">
+                <img src="{{ book.cover.url }}" alt="{{ book.title }}" class="book-image">
             {% else %}
                 <div class="no-image">Обкладинка відсутня</div>
             {% endif %}
 
             <div class="book-info">
                 <h2 class="book-title">{{ book.title }}</h2>
-                <p class="book-authors">{{ book.authors|join:", " }}</p>
-               <a href="{% url 'books:details' book.slug %}" class="btn-details">Детальніше</a>
+                <p class="book-authors">{{ book.authors.all|join:", " }}</p>
+                <a href="{% url 'books:details' book.slug %}" class="btn-details">Детальніше</a>
             </div>
         </div>
         {% empty %}
         <p>Книг не знайдено. Спробуйте оновити сторінку.</p>
         {% endfor %}
     </div>
+
+    {% if page_obj.has_other_pages %}
+    <nav class="pagination">
+        <div class="pagination-container">
+            {% if page_obj.has_previous %}
+                <a href="?page={{ page_obj.previous_page_number }}" class="page-link">&laquo; Назад</a>
+            {% endif %}
+
+            <span class="page-current">
+                {{ page_obj.number }} з {{ page_obj.paginator.num_pages }}
+            </span>
+
+            {% if page_obj.has_next %}
+                <a href="?page={{ page_obj.next_page_number }}" class="page-link">Вперед &raquo;</a>
+            {% endif %}
+        </div>
+    </nav>
+    {% endif %}
 
 </body>
 </html>
