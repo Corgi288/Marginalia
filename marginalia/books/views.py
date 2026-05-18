@@ -1,24 +1,67 @@
-from django.shortcuts import render, get_object_or_404
-from django.core.paginator import Paginator
-from .models import Books
+from django.views.generic import CreateView, DetailView, ListView
+from django.contrib.auth.views import LoginView
+from django.views.generic.edit import FormMixin
+from django.urls import reverse_lazy
+from django.shortcuts import redirect
+from .models import Book
+from .forms import UserRegistrationForm, DiscussionForm
 
 
-def book_list_view(request):
-    books = Books.objects.order_by('?')[:120]
+class Book_List(ListView):
+    model = Book
+    template_name = 'books/index.html'
+    context_object_name = 'page'
+    paginate_by = 15
 
-    paginator = Paginator(books, 20)
-    page_number = request.GET.get('page')
-    page_obj = paginator.get_page(page_number)
+class Book_Detail(FormMixin, DetailView):
+    model = Book
+    template_name = 'books/booksDetails.html'
+    context_object_name = 'book'
+    slug_url_kwarg = 'book_slug' 
+    
+    form_class = DiscussionForm 
 
-    context = {
-    'page_obj': page_obj,
-    }
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['discussions'] = self.object.discussions.order_by('-created_at')
+        
+        return context
 
-    return render(request, 'books/index.html', {'page_obj': page_obj})
+    def post(self, request, *args, **kwargs):
+        if not request.user.is_authenticated:
+            return redirect('login')
+        
+        self.object = self.get_object()
+        form = self.get_form()
+        if form.is_valid():
+            return self.form_valid(form)
+        else:
+            return self.form_invalid(form)
 
-def books_details(request, book_slug):
-    book = get_object_or_404(Books, slug=book_slug)
+    def form_valid(self, form):
+        topic = form.save(commit=False)
+        topic.book = self.object
+        topic.author = self.request.user
+        topic.save()
+        
+        return super().form_valid(form)
 
-    return render(request, 'books/booksDetails.html',{
-        'book': book
-    })
+    def get_success_url(self):
+        return self.request.path
+
+
+class RegisterView(CreateView):
+    form_class = UserRegistrationForm
+    template_name = 'user/register.html'
+    
+    success_url = reverse_lazy('login')
+
+    def form_valid(self, form):
+        user = form.save(commit=False)
+        user.set_password(form.cleaned_data['password'])
+        user.save()
+
+        return super().form_valid(form)
+    
+class Login(LoginView):
+    template_name = 'user/login.html'

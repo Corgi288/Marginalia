@@ -14,7 +14,6 @@
         <a href="{% url 'books:book_feed' %}" class="back-link">← Повернутися до стрічки</a>
     </nav>
 
- 
     <article class="book-card-detail">
         <div class="book-cover">
             {% if book.cover %}
@@ -26,7 +25,7 @@
 
         <div class="book-info">
             <h1 class="book-title">{{ book.title }}</h1>
-            <p class="book-authors">{{ book.author}}</p>
+            <p class="book-authors">{{ book.author }}</p>
 
             <div class="book-description">
                 <h3>Короткий опис</h3>
@@ -34,7 +33,75 @@
             </div>
         </div>
     </article>
+
+    <!-- ================= БЛОК ОБГОВОРЕНЬ ================= -->
+    <section class="discussions-section" style="margin-top: 40px;">
+        <div class="discussions-header" style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px;">
+            <h2>Обговорення книги</h2>
+            {% if user.is_authenticated %}
+                <button id="toggle-form-btn" class="btn-create">Створити нове обговорення</button>
+            {% else %}
+                <p><a href="{% url 'login' %}">Увійдіть</a>, щоб розпочати обговорення.</p>
+            {% endif %}
+        </div>
+
+        {% if user.is_authenticated %}
+        <div id="discussion-form-container" style="display: none; background: #f9f9f9; padding: 20px; border-radius: 8px; margin-bottom: 30px; border: 1px solid #ddd;">
+            <form method="post" action="{% url 'books:details' book.slug %}">
+                {% csrf_token %}
+                
+                <div style="margin-bottom: 15px;">
+                    <label for="id_title" style="display: block; margin-bottom: 5px; font-weight: bold;">Назва теми:</label>
+                    <input type="text" name="title" id="id_title" required placeholder="Про що хочете поговорити?" style="width: 100%; padding: 10px; border: 1px solid #ccc; border-radius: 4px; box-sizing: border-box;">
+                </div>
+
+                <div style="margin-bottom: 15px;">
+                    <label for="id_description" style="display: block; margin-bottom: 5px; font-weight: bold;">Опис / Перший допис:</label>
+                    <textarea name="description" id="id_description" rows="5" placeholder="Поділіться думками про книгу..." style="width: 100%; padding: 10px; border: 1px solid #ccc; border-radius: 4px; box-sizing: border-box; resize: vertical;"></textarea>
+                </div>
+
+                <button type="submit" style="background: #28a745; color: white; border: none; padding: 10px 20px; border-radius: 4px; cursor: pointer; font-weight: bold;">Опублікувати</button>
+            </form>
+        </div>
+        {% endif %}
+
+        <div class="discussions-list">
+            {% for discussion in discussions %}
+                <div class="discussion-item" style="border-bottom: 1px solid #eee; padding: 15px 0;">
+                    <h3 style="margin: 0 0 5px 0;">{{ discussion.title }}</h3>
+                    <p style="font-size: 0.85em; color: #666; margin: 0 0 10px 0;">
+                        Автор: <strong>{{ discussion.author.username }}</strong> | Додано: {{ discussion.created_at|date:"d.m.Y H:i" }}
+                    </p>
+                    <p style="margin: 0 0 10px 0;">{{ discussion.description|truncatewords:30 }}</p>
+                    
+                    <a href="#" style="color: #007bff; text-decoration: none; font-weight: bold;">Читати далі ({{ discussion.comments.count }} коментарів) →</a>
+                </div>
+            {% empty %}
+                <p style="color: #777; font-style: italic;">Для цієї книги ще немає жодного обговорення. Будьте першим!</p>
+            {% endfor %}
+        </div>
+    </section>
 </div>
+
+<!-- JavaScript для показу/приховування форми -->
+<script>
+    const toggleBtn = document.getElementById('toggle-form-btn');
+    const formContainer = document.getElementById('discussion-form-container');
+
+    if (toggleBtn && formContainer) {
+        toggleBtn.addEventListener('click', function() {
+            if (formContainer.style.display === 'none') {
+                formContainer.style.display = 'block';
+                toggleBtn.textContent = 'Скасувати';
+                toggleBtn.style.background = '#dc3545'; 
+            } else {
+                formContainer.style.display = 'none';
+                toggleBtn.textContent = 'Створити нове обговорення';
+                toggleBtn.style.background = ''; 
+            }
+        });
+    }
+</script>
 
 </body>
 </html>
