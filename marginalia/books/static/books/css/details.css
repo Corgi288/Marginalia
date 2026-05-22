@@ -1,118 +1,171 @@
-/* Основні налаштування */
-:root {
-    --bg-color: #fdfaf5;
-    --card-bg: #ffffff;
-    --text-main: #2c3e50;
-    --text-muted: #7f8c8d;
-    --accent: #5d4037; /* Коричневий відтінок для стилю Marginalia */
-    --accent-hover: #8d6e63;
-    --shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
-}
+/* static/books/css/details.css */
 
-body {
-    background-color: var(--bg-color);
-    color: var(--text-main);
-    font-family: 'Georgia', serif; /* Засічки краще пасують до книг */
-    margin: 0;
-    padding: 40px 20px;
-}
-
-.container {
-    max-width: 900px;
-    margin: 0 auto;
-}
-
-/* Навігація */
+/* Кнопка "Назад" */
 .back-link {
     display: inline-block;
-    margin-bottom: 25px;
-    color: var(--accent);
+    margin-bottom: 20px;
+    color: var(--color-brown);
     text-decoration: none;
     font-weight: bold;
-    font-family: 'Arial', sans-serif;
+    font-size: 1.1rem;
+    transition: transform 0.2s ease;
 }
 
 .back-link:hover {
-    text-decoration: underline;
+    transform: translateX(-5px);
 }
 
-/* Картка детальної інформації */
+/* Деталі книги (Обкладинка + Інфо) */
 .book-card-detail {
-    background: var(--card-bg);
-    border-radius: 12px;
-    box-shadow: var(--shadow);
     display: flex;
     gap: 40px;
+    background-color: var(--bg-navbar);
     padding: 30px;
-    margin-bottom: 30px;
-    overflow: hidden;
-}
-
-.book-cover {
-    flex-shrink: 0;
-    width: 280px;
+    border-radius: 8px;
+    border: 1px solid rgba(92, 58, 50, 0.2);
+    box-shadow: 4px 6px 12px rgba(0, 0, 0, 0.05);
+    margin-bottom: 40px;
 }
 
 .book-cover img {
-    width: 100%;
-    border-radius: 8px;
-    box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+    max-width: 250px;
+    border-radius: 4px;
+    border: 1px solid rgba(92, 58, 50, 0.3);
+    box-shadow: 2px 2px 8px rgba(0,0,0,0.2);
 }
 
-.no-image {
-    width: 100%;
-    height: 380px;
-    background: #eceff1;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    border-radius: 8px;
-    color: var(--text-muted);
+.book-info h1 {
+    color: var(--color-brown);
+    margin-bottom: 5px;
+    font-size: 2.2rem;
 }
 
-/* Текстова частина */
-.book-info {
-    flex-grow: 1;
-}
-
-.book-id {
-    font-family: 'Arial', sans-serif;
-    font-size: 0.85rem;
-    color: white;
-    background: var(--accent);
-    padding: 3px 10px;
-    border-radius: 15px;
-    display: inline-block;
-    margin-bottom: 15px;
-}
-
-.book-title {
-    font-size: 2.5rem;
-    margin: 0 0 10px 0;
-    line-height: 1.2;
-}
-
-.book-authors {
-    font-size: 1.3rem;
-    color: var(--text-muted);
+.book-info .book-authors {
+    font-size: 1.2rem;
+    color: #5a4b41;
     font-style: italic;
     margin-bottom: 25px;
 }
 
-.book-description {
-    line-height: 1.7;
-    font-family: 'Arial', sans-serif;
-    color: #444;
+.book-description h3 {
+    color: var(--color-brown);
+    border-bottom: 1px solid rgba(92, 58, 50, 0.2);
+    padding-bottom: 5px;
+    margin-bottom: 15px;
 }
 
-/* Адаптивність */
-@media (max-width: 768px) {
-    .book-card-detail {
-        flex-direction: column;
-        align-items: center;
-        text-align: center;
-    }
-    .book-cover {
-        width: 220px;
-    }
+/* ========================================= */
+/* БЛОК ОБГОВОРЕНЬ                           */
+/* ========================================= */
+.discussions-section {
+    margin-top: 40px;
+    padding-top: 20px;
+    border-top: 2px dashed rgba(92, 58, 50, 0.3);
+}
+
+.discussions-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 30px;
+}
+
+.discussions-header h2 {
+    color: var(--color-brown);
+}
+
+/* Перевикористовуємо ретро-кнопки */
+.btn-retro {
+    background-color: var(--color-brown);
+    color: var(--text-light);
+    border: 1px solid #3a221d;
+    border-radius: 6px;
+    padding: 8px 16px;
+    font-family: var(--font-serif);
+    cursor: pointer;
+    font-size: 1rem;
+    transition: background-color 0.2s ease;
+}
+
+.btn-retro:hover {
+    background-color: #462c25;
+}
+
+/* Стилі для посилань */
+.link-retro {
+    color: var(--color-red-accent);
+    text-decoration: none;
+}
+.link-retro.bold {
+    font-weight: bold;
+}
+.link-retro:hover {
+    text-decoration: underline;
+}
+
+/* Форма обговорення */
+.form-retro-container {
+    background-color: var(--bg-navbar);
+    padding: 25px;
+    border-radius: 8px;
+    border: 1px dashed var(--color-brown);
+    margin-bottom: 30px;
+}
+
+.form-group {
+    margin-bottom: 20px;
+}
+
+.form-group label {
+    display: block;
+    margin-bottom: 8px;
+    color: var(--color-brown);
+    font-weight: bold;
+}
+
+.retro-input {
+    width: 100%;
+    background-color: var(--bg-parchment);
+    border: 1px solid rgba(92, 58, 50, 0.4);
+    border-radius: 4px;
+    padding: 12px;
+    font-family: var(--font-serif);
+    color: var(--color-brown);
+    box-sizing: border-box;
+}
+
+.retro-input:focus {
+    outline: none;
+    background-color: #fcf6ea;
+    border-color: var(--color-brown);
+}
+
+/* Список тем */
+.discussion-item {
+    border-bottom: 1px solid rgba(92, 58, 50, 0.2);
+    padding: 20px 0;
+}
+
+.discussion-item h3 {
+    color: var(--color-brown);
+    margin-bottom: 8px;
+}
+
+.meta-info {
+    font-size: 0.9rem;
+    color: #5a4b41;
+    margin-bottom: 12px;
+    font-style: italic;
+}
+
+.desc-text {
+    margin-bottom: 15px;
+    line-height: 1.6;
+}
+
+.empty-msg {
+    color: rgba(92, 58, 50, 0.7);
+    font-style: italic;
+    text-align: center;
+    padding: 20px 0;
 }

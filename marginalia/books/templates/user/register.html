@@ -1,20 +1,165 @@
+{% load static %}
 <!DOCTYPE html>
-<html lang="en">
+<html lang="uk">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Marginalia | Реєстрація</title>
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400..700;1,400..700&display=swap" rel="stylesheet">
+    
+    <link rel="stylesheet" href="{% static 'books/css/style.css' %}">
+
+    <style>
+       
+        .auth-container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 80vh; 
+            padding: 40px 0;
+        }
+
+        .auth-card {
+            background-color: var(--bg-navbar);
+            padding: 40px;
+            border-radius: 8px;
+            border: 1px solid rgba(92, 58, 50, 0.2);
+            box-shadow: 4px 6px 12px rgba(0, 0, 0, 0.08);
+            width: 100%;
+            max-width: 550px;
+            text-align: center;
+        }
+
+        .auth-card h2 {
+            color: var(--color-brown);
+            margin-bottom: 25px;
+            font-size: 2rem;
+            border-bottom: 2px dashed rgba(92, 58, 50, 0.3);
+            padding-bottom: 15px;
+        }
+
+        .auth-card form p {
+            text-align: left;
+            margin-bottom: 18px;
+        }
+
+        .auth-card label {
+            display: block;
+            margin-bottom: 5px;
+            color: var(--color-brown);
+            font-weight: bold;
+        }
+
+        .auth-card input[type="text"],
+        .auth-card input[type="password"],
+        .auth-card input[type="email"],
+        .auth-card textarea {
+            width: 100%;
+            background-color: #fcf6ea;
+            border: 1px solid rgba(92, 58, 50, 0.4);
+            border-radius: 4px;
+            padding: 12px;
+            font-family: var(--font-serif);
+            color: var(--color-brown);
+            box-sizing: border-box;
+            transition: all 0.3s ease;
+        }
+
+        .auth-card input:focus,
+        .auth-card textarea:focus {
+            outline: none;
+            border-color: var(--color-brown);
+            box-shadow: 0 0 5px rgba(92, 58, 50, 0.2);
+        }
+
+        .auth-card input[type="file"] {
+            width: 100%;
+            padding: 10px;
+            background-color: transparent;
+            border: 1px dashed rgba(92, 58, 50, 0.4);
+            border-radius: 4px;
+            color: #5a4b41;
+            font-family: var(--font-serif);
+        }
+
+        .helptext {
+            display: block;
+            font-size: 0.85rem;
+            color: #5a4b41;
+            margin-top: 5px;
+            font-style: italic;
+        }
+
+        .errorlist {
+            color: var(--color-red-accent);
+            list-style-type: none;
+            padding: 0;
+            margin-bottom: 10px;
+            font-size: 0.9rem;
+            font-weight: bold;
+        }
+
+        .auth-card .btn-retro {
+            width: 100%;
+            margin-top: 20px;
+            padding: 12px;
+            font-size: 1.1rem;
+            font-weight: bold;
+        }
+
+        .auth-links {
+            margin-top: 25px;
+            font-size: 0.95rem;
+            color: #5a4b41;
+        }
+        
+        .link-retro {
+            color: var(--color-red-accent);
+            text-decoration: none;
+            font-weight: bold;
+        }
+
+        .link-retro:hover {
+            text-decoration: underline;
+        }
+    </style>
 </head>
 <body>
-    <h2>Реєстрація у Marginalia</h2>
 
-<form method="post" enctype="multipart/form-data">
-    {% csrf_token %}
-    
-    {{ form.as_p }}
-    <button type="submit">Створити акаунт</button>
-</form>
+    <header class="navbar">
+        <div class="nav-left">
+            <a href="{% url 'books:book_feed' %}" class="logo">Marginalia</a>
+            <a href="#" class="nav-btn">About us</a>
+        </div>
+        
+        <div class="nav-right" style="display: flex; align-items: center; gap: 15px;">
+            <div class="search-wrapper">
+                <input type="text" placeholder="Search..." class="search-input">
+            </div>
+            <a href="{% url 'books:login' %}" class="nav-btn">Увійти</a>
+        </div>
+    </header>
 
+    <main class="main-container auth-container">
+        
+        <div class="auth-card">
+            <h2>Реєстрація у Marginalia</h2>
+
+            <form method="post" enctype="multipart/form-data">
+                {% csrf_token %}
+                
+                {{ form.as_p }}
+                
+                <button type="submit" class="btn-retro">Створити акаунт</button>
+            </form>
+
+            <p class="auth-links">Вже маєте акаунт? <a href="{% url 'books:login' %}" class="link-retro">Увійдіть тут</a></p>
+        </div>
+
+    </main>
 
 </body>
 </html>

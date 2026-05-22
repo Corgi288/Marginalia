@@ -1,25 +1,148 @@
+{% load static %}
 <!DOCTYPE html>
-<html lang="en">
+<html lang="uk">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Marginalia | Вхід у систему</title>
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400..700;1,400..700&display=swap" rel="stylesheet">
+    
+    <link rel="stylesheet" href="{% static 'books/css/style.css' %}">
+
+    <style>
+        .auth-container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 70vh; 
+        }
+
+
+        .auth-card {
+            background-color: var(--bg-navbar);
+            padding: 40px;
+            border-radius: 8px;
+            border: 1px solid rgba(92, 58, 50, 0.2);
+            box-shadow: 4px 6px 12px rgba(0, 0, 0, 0.08);
+            width: 100%;
+            max-width: 450px;
+            text-align: center;
+        }
+
+        .auth-card h2 {
+            color: var(--color-brown);
+            margin-bottom: 25px;
+            font-size: 2rem;
+            border-bottom: 2px dashed rgba(92, 58, 50, 0.3);
+            padding-bottom: 15px;
+        }
+
+        .error-msg {
+            background-color: rgba(196, 85, 85, 0.1);
+            color: var(--color-red-accent);
+            padding: 12px;
+            border: 1px solid var(--color-red-accent);
+            border-radius: 4px;
+            margin-bottom: 20px;
+            font-weight: bold;
+            font-size: 0.95rem;
+        }
+
+        .auth-card form p {
+            text-align: left;
+            margin-bottom: 15px;
+        }
+
+        .auth-card label {
+            display: block;
+            margin-bottom: 5px;
+            color: var(--color-brown);
+            font-weight: bold;
+        }
+
+        .auth-card input {
+            width: 100%;
+            background-color: #fcf6ea;
+            border: 1px solid rgba(92, 58, 50, 0.4);
+            border-radius: 4px;
+            padding: 12px;
+            font-family: var(--font-serif);
+            color: var(--color-brown);
+            box-sizing: border-box;
+            transition: all 0.3s ease;
+        }
+
+        .auth-card input:focus {
+            outline: none;
+            border-color: var(--color-brown);
+            box-shadow: 0 0 5px rgba(92, 58, 50, 0.2);
+        }
+
+        .auth-card .btn-retro {
+            width: 100%;
+            margin-top: 15px;
+            padding: 12px;
+            font-size: 1.1rem;
+            font-weight: bold;
+        }
+
+        /* Текст під кнопкою */
+        .auth-links {
+            margin-top: 25px;
+            font-size: 0.95rem;
+            color: #5a4b41;
+        }
+        
+        .link-retro {
+            color: var(--color-red-accent);
+            text-decoration: none;
+            font-weight: bold;
+        }
+
+        .link-retro:hover {
+            text-decoration: underline;
+        }
+    </style>
 </head>
 <body>
-    <h2>Вхід у систему</h2>
 
-{% if error %}
-    <p style="color: red;">{{ error }}</p>
-{% endif %}
+    <header class="navbar">
+        <div class="nav-left">
+            <a href="{% url 'books:book_feed' %}" class="logo">Marginalia</a>
+            <a href="#" class="nav-btn">About us</a>
+        </div>
+        
+        <div class="nav-right" style="display: flex; align-items: center; gap: 15px;">
+            <div class="search-wrapper">
+                <input type="text" placeholder="Search..." class="search-input">
+            </div>
+        </div>
+    </header>
 
-<form method="post">
-    {% csrf_token %}
-    
-    {{ form.as_p }}
-    
-    <button type="submit">Увійти</button>
-</form>
+    <main class="main-container auth-container">
+        
+        <div class="auth-card">
+            <h2>Вхід у систему</h2>
 
-<p>Немає акаунту? <a href="{% url 'books:register' %}">Зареєструватися</a></p>
+            {% if error %}
+                <div class="error-msg">{{ error }}</div>
+            {% endif %}
+
+            <form method="post">
+                {% csrf_token %}
+                
+                {{ form.as_p }}
+                
+                <button type="submit" class="btn-retro">Увійти</button>
+            </form>
+
+            <p class="auth-links">Немає акаунту? <a href="{% url 'books:register' %}" class="link-retro">Зареєструватися</a></p>
+        </div>
+
+    </main>
+
 </body>
 </html>

@@ -1,6 +1,6 @@
 from django import forms
 from django.contrib.auth import get_user_model
-from .models import Discussion
+from .models import Discussion, Comment
 
 User = get_user_model()
 
@@ -41,3 +41,12 @@ class DiscussionForm(forms.ModelForm):
     class Meta:
         model = Discussion 
         fields = ['title', 'description',]  
+
+class CommentForm(forms.ModelForm):
+    text = forms.CharField(
+        widget=forms.TextInput(attrs={'placeholder': 'Про що хочете поговорити?', 'style': 'width: 100%; padding: 10px;'})
+    )
+
+    class Meta:
+        model = Comment 
+        fields = ['text'] 
