@@ -31,10 +31,10 @@ class UserLoginForm(forms.Form):
 
 class DiscussionForm(forms.ModelForm):
     title = forms.CharField(
-        widget=forms.TextInput(attrs={'placeholder': 'Про що хочете поговорити?', 'style': 'width: 100%; padding: 10px;'})
+        widget=forms.TextInput(attrs={'placeholder': 'What would you like to talk about?', 'style': 'width: 100%; padding: 10px;'})
     )
     description = forms.CharField(
-        widget=forms.Textarea(attrs={'placeholder': 'Поділіться думками...', 'rows': 5, 'style': 'width: 100%; padding: 10px;'}),
+        widget=forms.Textarea(attrs={'placeholder': 'Share your thoughts...', 'rows': 5, 'style': 'width: 100%; padding: 10px;'}),
         required=False
     )
 
@@ -44,7 +44,7 @@ class DiscussionForm(forms.ModelForm):
 
 class CommentForm(forms.ModelForm):
     text = forms.CharField(
-        widget=forms.TextInput(attrs={'placeholder': 'Про що хочете поговорити?', 'style': 'width: 100%; padding: 10px;'})
+        widget=forms.TextInput(attrs={'placeholder': 'What would you like to talk about?', 'style': 'width: 100%; padding: 10px;'})
     )
 
     class Meta:

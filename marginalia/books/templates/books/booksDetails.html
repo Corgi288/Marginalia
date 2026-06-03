@@ -74,7 +74,7 @@
                     <div class="discussion-item">
                         <h3>{{ discussion.title }}</h3>
                         <p class="meta-info">
-                            Author: <strong>{{ discussion.author.username }}</strong> | Додано: {{ discussion.created_at|date:"d.m.Y H:i" }}
+                            Author: <strong>{{ discussion.author.username }}</strong> | Added: {{ discussion.created_at|date:"d.m.Y H:i" }}
                         </p>
                         <p class="desc-text">{{ discussion.description|truncatewords:30 }}</p>
                         

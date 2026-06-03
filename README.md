@@ -78,6 +78,7 @@ Start the Django local development server:
 Bash
 python manage.py runserver
 Now, open your browser and go to http://127.0.0.1:8000/ to explore the website!
+```
 
 ## Status
 🚧 Project under development
