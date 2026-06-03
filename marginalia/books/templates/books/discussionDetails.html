@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Marginalia | Обговорення: {{ discussion.title }}</title>
+    <title>Marginalia | Discussion: {{ discussion.title }}</title>
     
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -177,7 +177,6 @@
     <header class="navbar">
         <div class="nav-left">
             <a href="{% url 'books:book_feed' %}" class="logo">Marginalia</a>
-            <a href="#" class="nav-btn">About us</a>
         </div>
         
         <div class="nav-right" style="display: flex; align-items: center; gap: 15px;">
@@ -189,10 +188,10 @@
                 <a href="{% url 'user:profile_detail' request.user.uuid %}" class="nav-btn" style="background-color: transparent; border: none; color: var(--color-brown);">{{ user.username }}</a>
                 <form action="{% url 'books:logout' %}" method="POST" style="display: inline;">
                     {% csrf_token %}
-                    <button type="submit" class="nav-btn">Вийти</button>
+                    <button type="submit" class="nav-btn">Log out</button>
                 </form>
             {% else %}
-                <a href="{% url 'books:login' %}" class="nav-btn">Увійти</a>
+                <a href="{% url 'books:login' %}" class="nav-btn">Sign in</a>
                 <a href="{% url 'books:register' %}" class="nav-btn" style="background-color: transparent; color: var(--color-brown); border: 1px solid var(--color-brown);">Зареєструватися</a>
             {% endif %}
         </div>
@@ -201,17 +200,17 @@
     <main class="main-container">
         
         <nav>
-            <a href="{% url 'books:details' discussion.book.slug %}" class="back-link">← Повернутися до книги</a>
+            <a href="{% url 'books:details' discussion.book.slug %}" class="back-link">← Back to the book</a>
         </nav>
 
         <div class="discussion-detail">
             <div class="discussion-header">
                 <h1>{{ discussion.title }}</h1>
                 <p class="discussion-meta">
-                    Автор: <strong>{{ discussion.author.username }}</strong> | 
-                    Створено: {{ discussion.created_at|date:"d M Y H:i" }}
+                    Author: <strong>{{ discussion.author.username }}</strong> | 
+                    Created: {{ discussion.created_at|date:"d M Y H:i" }}
                 </p>
-                <p class="discussion-meta">Книга: <strong>{{ discussion.book.title }}</strong></p>
+                <p class="discussion-meta">Book: <strong>{{ discussion.book.title }}</strong></p>
             </div>
 
             <div class="discussion-body">
@@ -220,7 +219,7 @@
         </div>
 
         <div class="add-comment-section">
-            <h2>Додати коментар</h2>
+            <h2>Add a comment</h2>
             
             {% if user.is_authenticated %}
                 <form method="post" action="">
@@ -228,17 +227,17 @@
                     
                     {{ form.as_p }}
                     
-                    <button type="submit" class="btn-retro">Відправити</button>
+                    <button type="submit" class="btn-retro">Send</button>
                 </form>
             {% else %}
                 <p>
-                    <a href="{% url 'books:login' %}?next={{ request.path }}" class="link-retro">Увійдіть</a>, щоб долучитися до обговорення.
+                    <a href="{% url 'books:login' %}?next={{ request.path }}" class="link-retro">Sign in</a>, to join the discussion.
                 </p>
             {% endif %}
         </div>
 
         <div class="comments-section">
-            <h3>Коментарі ({{ comments.count }})</h3>
+            <h3>Comments ({{ comments.count }})</h3>
 
             <div class="comments-list">
                 {% for comment in comments %}
@@ -254,7 +253,7 @@
                         </div>
                     </div>
                 {% empty %}
-                    <p class="empty-comments">До цієї дискусії ще немає коментарів. Будьте першим!</p>
+                    <p class="empty-comments">There are no comments on this discussion yet. Be the first!</p>
                 {% endfor %}
             </div>
         </div>

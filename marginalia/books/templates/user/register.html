@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Marginalia | Реєстрація</title>
+    <title>Marginalia | Registration</title>
     
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -132,31 +132,30 @@
     <header class="navbar">
         <div class="nav-left">
             <a href="{% url 'books:book_feed' %}" class="logo">Marginalia</a>
-            <a href="#" class="nav-btn">About us</a>
         </div>
         
         <div class="nav-right" style="display: flex; align-items: center; gap: 15px;">
             <div class="search-wrapper">
                 <input type="text" placeholder="Search..." class="search-input">
             </div>
-            <a href="{% url 'books:login' %}" class="nav-btn">Увійти</a>
+            <a href="{% url 'books:login' %}" class="nav-btn">Sign in</a>
         </div>
     </header>
 
     <main class="main-container auth-container">
         
         <div class="auth-card">
-            <h2>Реєстрація у Marginalia</h2>
+            <h2>Sign up for Marginalia</h2>
 
             <form method="post" enctype="multipart/form-data">
                 {% csrf_token %}
                 
                 {{ form.as_p }}
                 
-                <button type="submit" class="btn-retro">Створити акаунт</button>
+                <button type="submit" class="btn-retro">Create an account</button>
             </form>
 
-            <p class="auth-links">Вже маєте акаунт? <a href="{% url 'books:login' %}" class="link-retro">Увійдіть тут</a></p>
+            <p class="auth-links">Already have an account? <a href="{% url 'books:login' %}" class="link-retro">Click here to log in</a></p>
         </div>
 
     </main>

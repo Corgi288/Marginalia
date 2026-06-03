@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Marginalia | Вхід у систему</title>
+    <title>Marginalia | Log in</title>
     
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -112,7 +112,6 @@
     <header class="navbar">
         <div class="nav-left">
             <a href="{% url 'books:book_feed' %}" class="logo">Marginalia</a>
-            <a href="#" class="nav-btn">About us</a>
         </div>
         
         <div class="nav-right" style="display: flex; align-items: center; gap: 15px;">
@@ -125,7 +124,7 @@
     <main class="main-container auth-container">
         
         <div class="auth-card">
-            <h2>Вхід у систему</h2>
+            <h2>Log in</h2>
 
             {% if error %}
                 <div class="error-msg">{{ error }}</div>
@@ -136,10 +135,10 @@
                 
                 {{ form.as_p }}
                 
-                <button type="submit" class="btn-retro">Увійти</button>
+                <button type="submit" class="btn-retro">Sign in</button>
             </form>
 
-            <p class="auth-links">Немає акаунту? <a href="{% url 'books:register' %}" class="link-retro">Зареєструватися</a></p>
+            <p class="auth-links">Don't have an account? <a href="{% url 'books:register' %}" class="link-retro">Sign up</a></p>
         </div>
 
     </main>
