@@ -78,9 +78,5 @@ Bash
 python manage.py runserver
 Now, open your browser and go to http://127.0.0.1:8000/ to explore the website!
 ```
-<<<<<<< HEAD
-
-=======
->>>>>>> 48aaa50eea2acca39097ffa5df86bfd76bba2717
 ## Status
 🚧 Project under development
