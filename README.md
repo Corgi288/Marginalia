@@ -4,13 +4,12 @@
 ![Django](https://img.shields.io/badge/Framework-Django-092E20?style=flat&logo=django&logoColor=white)
 ![License](https://img.shields.io/badge/License-MIT-green)
 
-Marginalia is a web platform designed for book lovers, where hundreds of users can read together, share thoughts on books, and discuss specific passages or pages right in the margins.
-
+Marginalia is a web platform designed for book lovers, where hundreds of users can share thoughts on books, and discuss specific passages or pages
 ---
 
-## 🚀 Live Demo
+## 🚀 Demo
 
-Here is a quick look at the main feature — interacting with the book text and creating discussions in real-time:
+Here is a quick look at the main feature — interacting with the book text and creating discussions:
 
 <p align="center">
   <img src="docs/demo.gif" width="85%" alt="Marginalia Demo">
@@ -79,6 +78,9 @@ Bash
 python manage.py runserver
 Now, open your browser and go to http://127.0.0.1:8000/ to explore the website!
 ```
+<<<<<<< HEAD
 
+=======
+>>>>>>> 48aaa50eea2acca39097ffa5df86bfd76bba2717
 ## Status
 🚧 Project under development
