@@ -1,89 +1,101 @@
-/* static/books/css/details.css */
+/* ========================================================================== */
+/* СТИЛІ ДЛЯ СТОРІНКИ ДЕТАЛЕЙ КНИГИ (Для додавання в details.css або style.css) */
+/* ========================================================================== */
 
 /* Кнопка "Назад" */
 .back-link {
     display: inline-block;
-    margin-bottom: 20px;
-    color: var(--color-brown);
+    background-color: var(--color-brown, #5c3a32);
+    color: var(--text-light, #f4edd8);
     text-decoration: none;
-    font-weight: bold;
-    font-size: 1.1rem;
-    transition: transform 0.2s ease;
+    padding: 8px 16px;
+    border-radius: 20px;
+    font-size: 0.9rem;
+    font-weight: 500;
+    margin-bottom: 25px;
+    transition: background-color 0.2s ease, transform 0.1s ease;
 }
 
 .back-link:hover {
-    transform: translateX(-5px);
+    background-color: #462c25;
+    transform: translateX(-3px); /* Легкий ефект зсування вліво при наведенні */
 }
 
-/* Деталі книги (Обкладинка + Інфо) */
+/* Контейнер картки детальної інформації */
 .book-card-detail {
     display: flex;
     gap: 40px;
-    background-color: var(--bg-navbar);
-    padding: 30px;
-    border-radius: 8px;
+    background-color: var(--bg-navbar, #ebdcc5);
     border: 1px solid rgba(92, 58, 50, 0.2);
-    box-shadow: 4px 6px 12px rgba(0, 0, 0, 0.05);
+    border-radius: 12px;
+    padding: 30px;
+    box-shadow: 2px 4px 12px rgba(0, 0, 0, 0.05);
     margin-bottom: 40px;
 }
 
-.book-cover img {
-    max-width: 250px;
-    border-radius: 4px;
-    border: 1px solid rgba(92, 58, 50, 0.3);
-    box-shadow: 2px 2px 8px rgba(0,0,0,0.2);
+/* Обкладинка книги (Захист від величезних розмірів) */
+.book-cover {
+    flex-shrink: 0;
+    width: 280px; /* Фіксована базова ширина для десктопа */
 }
 
-.book-info h1 {
-    color: var(--color-brown);
-    margin-bottom: 5px;
-    font-size: 2.2rem;
+.book-cover img {
+    width: 100%;
+    height: auto;
+    max-height: 420px; /* Максимальна висота, щоб картинка не була занадто довгою */
+    object-fit: cover;
+    border-radius: 6px;
+    border: 1px solid rgba(92, 58, 50, 0.15);
+    box-shadow: 3px 5px 15px rgba(0, 0, 0, 0.1);
+}
+
+/* Заглушка, якщо немає обкладинки */
+.book-cover .no-image {
+    width: 100%;
+    height: 380px;
+    background-color: var(--bg-parchment, #e2d3bd);
+    border: 2px dashed var(--color-brown, #5c3a32);
+    border-radius: 6px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--color-brown, #5c3a32);
+    font-weight: bold;
+}
+
+/* Текстова інформація про книгу */
+.book-info .book-title {
+    font-size: 2rem;
+    color: var(--color-brown, #5c3a32);
+    margin-bottom: 8px;
+    line-height: 1.2;
 }
 
 .book-info .book-authors {
     font-size: 1.2rem;
-    color: #5a4b41;
-    font-style: italic;
+    color: rgba(92, 58, 50, 0.8);
     margin-bottom: 25px;
+    font-style: italic;
 }
 
 .book-description h3 {
-    color: var(--color-brown);
-    border-bottom: 1px solid rgba(92, 58, 50, 0.2);
+    color: var(--color-brown, #5c3a32);
+    margin-bottom: 10px;
+    font-size: 1.1rem;
+    border-bottom: 1px solid rgba(92, 58, 50, 0.15);
     padding-bottom: 5px;
-    margin-bottom: 15px;
 }
 
-/* ========================================= */
-/* БЛОК ОБГОВОРЕНЬ                           */
-/* ========================================= */
-.discussions-section {
-    margin-top: 40px;
-    padding-top: 20px;
-    border-top: 2px dashed rgba(92, 58, 50, 0.3);
-}
-
-.discussions-header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin-bottom: 30px;
-}
-
-.discussions-header h2 {
-    color: var(--color-brown);
-}
-
-/* Перевикористовуємо ретро-кнопки */
+/* Ретро-кнопки для створення обговорень та форм */
 .btn-retro {
-    background-color: var(--color-brown);
-    color: var(--text-light);
+    background-color: var(--color-brown, #5c3a32);
+    color: var(--text-light, #f4edd8);
     border: 1px solid #3a221d;
     border-radius: 6px;
-    padding: 8px 16px;
+    padding: 10px 20px;
     font-family: var(--font-serif);
+    font-size: 0.95rem;
     cursor: pointer;
-    font-size: 1rem;
     transition: background-color 0.2s ease;
 }
 
@@ -91,81 +103,62 @@
     background-color: #462c25;
 }
 
-/* Стилі для посилань */
-.link-retro {
-    color: var(--color-red-accent);
-    text-decoration: none;
-}
-.link-retro.bold {
-    font-weight: bold;
-}
-.link-retro:hover {
-    text-decoration: underline;
-}
+/* ========================================= */
+/* АДАПТИВНІСТЬ ДЛЯ МОБІЛЬНИХ ПРИСТРОЇВ      */
+/* ========================================= */
+@media (max-width: 768px) {
+    /* Картка книги стає вертикальною на смартфонах */
+    .book-card-detail {
+        flex-direction: column;
+        gap: 20px;
+        padding: 20px;
+        align-items: center;
+    }
 
-/* Форма обговорення */
-.form-retro-container {
-    background-color: var(--bg-navbar);
-    padding: 25px;
-    border-radius: 8px;
-    border: 1px dashed var(--color-brown);
-    margin-bottom: 30px;
-}
+    /* Обкладинка центрується і стає адаптивною */
+    .book-cover {
+        width: 100%;
+        max-width: 220px; /* Зменшуємо розмір картинки на мобільних, щоб не була великою */
+    }
 
-.form-group {
-    margin-bottom: 20px;
-}
+    .book-cover img {
+        max-height: 320px;
+    }
 
-.form-group label {
-    display: block;
-    margin-bottom: 8px;
-    color: var(--color-brown);
-    font-weight: bold;
-}
+    .book-cover .no-image {
+        height: 300px;
+    }
 
-.retro-input {
-    width: 100%;
-    background-color: var(--bg-parchment);
-    border: 1px solid rgba(92, 58, 50, 0.4);
-    border-radius: 4px;
-    padding: 12px;
-    font-family: var(--font-serif);
-    color: var(--color-brown);
-    box-sizing: border-box;
-}
+    /* Текст */
+    .book-info {
+        width: 100%;
+        text-align: center; /* Центруємо назву та автора на смартфонах */
+    }
 
-.retro-input:focus {
-    outline: none;
-    background-color: #fcf6ea;
-    border-color: var(--color-brown);
-}
+    .book-info .book-title {
+        font-size: 1.5rem;
+    }
 
-/* Список тем */
-.discussion-item {
-    border-bottom: 1px solid rgba(92, 58, 50, 0.2);
-    padding: 20px 0;
-}
+    .book-info .book-authors {
+        font-size: 1rem;
+        margin-bottom: 15px;
+    }
 
-.discussion-item h3 {
-    color: var(--color-brown);
-    margin-bottom: 8px;
-}
+    .book-description {
+        text-align: left; /* Саму статтю/опис залишаємо вирівняною по лівому краю */
+    }
 
-.meta-info {
-    font-size: 0.9rem;
-    color: #5a4b41;
-    margin-bottom: 12px;
-    font-style: italic;
-}
+    /* Шапка секції обговорень */
+    .discussions-header {
+        flex-direction: column;
+        gap: 15px;
+        text-align: center;
+        align-items: stretch;
+        margin-bottom: 20px;
+    }
 
-.desc-text {
-    margin-bottom: 15px;
-    line-height: 1.6;
-}
-
-.empty-msg {
-    color: rgba(92, 58, 50, 0.7);
-    font-style: italic;
-    text-align: center;
-    padding: 20px 0;
+    .btn-retro {
+        width: 100%;
+        text-align: center;
+    }
 }
